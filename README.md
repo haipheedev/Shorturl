@@ -61,3 +61,9 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml (enabled by default - don't turn it off)
+
+ติดตั้ง Database
+1. Import  db/db_gs.sql  in phpmyadmin
+2. แก้ไขไฟล์  app/Config/Database.php
+  -  เปลี่ยนชื่อ Username, Passsword, Database ให้ตรงกับที่ติดตั้งในเครื่อง
+3. run  php spark serve
