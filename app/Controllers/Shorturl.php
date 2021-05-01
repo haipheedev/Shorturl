@@ -16,9 +16,7 @@ class Shorturl extends BaseController
 
 	public function create()
 	{
-
-		try
-		{
+	
 			if($this->request->getMethod() === "post")
 			{
 				$model = new ShorturlModel();
@@ -29,32 +27,26 @@ class Shorturl extends BaseController
 					'ip' => $ip
 				);
 
-				$qr = $model->insert($data);
+				$id = $model->insert($data);
 
-				if($qr)
+				if($id)
 				{
-					$insert_id = $this->db->insert_id();
-					$dataget = $model->getId($insert_id);
-					$data['shorturl'] = $model->getShorturl($dataget['shorturl']);
-					if($data['shorturl'])
-					{
-						echo view('layout/head');
-						echo view('getdata',$data);
-						echo view('layout/footer');
-					}
-				}else{
-					return View('/fails');
+					$dataget = $model->getId($id);
+				
+		
+					//return redirect()->to("view/".$dataget['shorturl']);
+
+					return $this->getdata($dataget['shorturl']);
+					// echo view('layout/head');
+					// echo view('success');
+					// print_r();
+					// echo view('layout/footer');
 				}
 			}
-		}
-		catch (\Exception $e)
-		{
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-			
-		}
 		
-		// return redirect()->to(site_url());
-		// return $this->response->redirect('/index.php');
+	
+	
+		
 	}
 
 	public function getdata($shorturl)
@@ -81,7 +73,7 @@ class Shorturl extends BaseController
 		
 	}
 
-	public function redirect($shorturl)
+	public function goto($shorturl)
 	{
 		try
 		{

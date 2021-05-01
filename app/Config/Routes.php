@@ -35,8 +35,7 @@ $routes->setAutoRoute(true);
 $routes->get('/','Shorturl::index');
 $routes->get('/home','Shorturl::index');
 $routes->get('/view/(:any)','Shorturl::getdata/$1');
-$routes->get('(:any)','Shorturl::redirect/$1');
-
+$routes->get('(:any)','Shorturl::goto/$1');
 $routes->post('/shorturl/create', 'Shorturl::create');
 $routes->post('/shorturl/delete', 'Shorturl::delete');
 
